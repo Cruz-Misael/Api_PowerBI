@@ -7,7 +7,6 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-
 // Inicia o servidor
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Servidor rodando na porta ${PORT}`);
@@ -25,7 +24,8 @@ const pool = mariadb.createPool({
   user: 'DevSebratel',
   password: 'DevBI*24',
   database: 'DHO_Application',
-  connectionLimit: 5,
+  connectionLimit: 10,  // Aumente o limite
+  acquireTimeout: 20000, // Tempo maior para adquirir conexão
 });
 
 // Middleware
