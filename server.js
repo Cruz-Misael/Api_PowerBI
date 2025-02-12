@@ -2,22 +2,11 @@ const express = require('express');
 const mariadb = require('mariadb');
 const bodyParser = require('body-parser');
 const cors = require("cors");
-
-
-app.use(cors());
-
-
-// app.use(
-//   cors({
-//     origin: "https://seu-frontend.vercel.app", // Substitua pelo domínio correto
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//   })
-// );
-
-
-
 const app = express();
-app.use(cors());
+
+require('dotenv').config();
+
+app.use(cors()); // Agora está depois da inicialização
 app.use(express.json());
 
 const PORT = process.env.PORT || 5000; // Porta dinâmica do Render
@@ -32,10 +21,10 @@ app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
 
 // Configurações do banco de dados
 const pool = mariadb.createPool({
-  host: '10.0.11.171',
-  user: 'DevSebratel',
-  password: 'DevBI*24',
-  database: 'DHO_Application',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
   connectionLimit: 10,  // Aumente o limite
   acquireTimeout: 20000, // Tempo maior para adquirir conexão
 });
