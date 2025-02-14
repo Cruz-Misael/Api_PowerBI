@@ -25,10 +25,6 @@ const pool = mariadb.createPool({
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  connectionLimit: 5, // 🔹 Reduzindo para evitar sobrecarga
-  acquireTimeout: 60000, // 🔹 Tempo maior para adquirir conexão
-  connectTimeout: 30000, // 🔹 Tempo maior para conectar
-  idleTimeout: 60000, // 🔹 Evita que Render mate conexões ociosas
 });
 
 
